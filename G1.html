@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Przykład losowej zmiany wartości a</title>
+    <script type="text/javascript">
+      var a = 1;
+      var max_value = 1.5;
+      var min_value = 0.5;
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function changeA() {
+        var direction = getRandomInt(-1, 1);
+        var change = direction * 0.1;
+        var new_a = a + change;
+        if (new_a < min_value) {
+          new_a = min_value;
+        } else if (new_a > max_value) {
+          new_a = max_value;
+        }
+        a = new_a;
+        document.getElementById("a").innerHTML = a.toFixed(1);
+      }
+
+      function saveA() {
+        var saved_a = a.toFixed(1);
+        var saved_a_list = document.getElementById("saved_a_list");
+        var new_item = document.createElement("li");
+        var new_text = document.createTextNode(saved_a);
+        new_item.appendChild(new_text);
+        saved_a_list.appendChild(new_item);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Przykład losowej zmiany wartości a</h1>
+    <p>Aktualna wartość a: <span id="a">1.0</span></p>
+    <button onclick="changeA()">Zmień wartość a</button>
+    <button onclick="saveA()">Zapisz wartość a</button>
+    <ul id="saved_a_list"></ul>
+  </body>
+</html>
